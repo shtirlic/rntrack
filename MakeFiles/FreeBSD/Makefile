@@ -9,7 +9,7 @@ CDEFS	= -DUNIX -DHAVE_STDIO_H -DHAVE_STDLIB_H -DHAVE_STRING_H -DHAVE_CTYPE_H -DH
           -DHAVE_SYS_NLS_H
 
 LFLAGS	= -s -L$(SMAPIDIR) -lsmapibsd
-SRCDIR	= ../../src
+SRCDIR	= ../../src/
 
 # to enable: run `make ENABLE_SCRIPTS=1` & etc.
 ENABLE_SCRIPTS?=0
@@ -71,12 +71,11 @@ OBJS= \
 	wildmat.o
 
 .PATH.cpp: $(SRCDIR)
-.PATH.c: $(SRCDIR)
 
 .cpp.o:
 	${CC} ${CFLAGS} ${CDEFS} -c $<
 
-.c.o:
+%.o: $(SRCDIR)%.cpp
 	${CC} ${CFLAGS} ${CDEFS} -c $<
 
 #${SRCDIR}cfg.cpp: ${SRCDIR}cfg.y
@@ -90,7 +89,7 @@ rntrack: smapi ${OBJS}
 	${CC} -o rntrack ${OBJS} ${LFLAGS}
 
 clean:
-	-rm -f $(SMAPIDIR)/*.o
+	-rm -f $(SMAPIDIR)/*.o 
 	-rm -f $(SMAPIDIR)/*.a
 	-rm -f *.o
 	-rm -f *~
