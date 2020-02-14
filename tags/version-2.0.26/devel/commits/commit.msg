@@ -1,1 +1,0 @@
-fix FreeBSD build. Patch by Sergey Anohin 2:5034/10
