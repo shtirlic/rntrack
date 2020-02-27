@@ -1032,12 +1032,12 @@ bool MSGASMSG::WriteOneMsg(unsigned int Num, cMSG & m)
     strncpy(Hdr.Subject, m._Subject, 72);
     strncpy(Hdr.FromName, m._FromName, 36);
     strncpy(Hdr.ToName, m._ToName, 36);
-#ifdef __GNUC__
+#if defined(__GNUC__) && !defined(__clang__)
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Wstringop-truncation"
 #endif
     strncpy(Hdr.DateTime, FromTime(m._Time), 20);
-#ifdef __GNUC__
+#if defined(__GNUC__) && !defined(__clang__)
     #pragma GCC diagnostic pop
 #endif
     Hdr.Cost      = m._Cost;

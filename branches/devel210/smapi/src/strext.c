@@ -368,12 +368,12 @@ char *extract_CVS_keyword(char *str)
     if (!r)
         return NULL;
 
-#ifdef __GNUC__
+#if defined(__GNUC__) && !defined(__clang__)
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Wstringop-overflow"
 #endif
     strncpy(r, tmp, l-2);
-#ifdef __GNUC__
+#if defined(__GNUC__) && !defined(__clang__)
     #pragma GCC diagnostic pop
 #endif
 

@@ -2484,12 +2484,12 @@ static void addkludge(char **line, char *kludge, char *ent, char *lf, dword len)
 
     strcpy(*line, kludge);
     *line += strlen(kludge);
-#ifdef __GNUC__
+#if defined(__GNUC__) && !defined(__clang__)
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Wstringop-truncation"
 #endif
     strncpy(*line, ent, len);
-#ifdef __GNUC__
+#if defined(__GNUC__) && !defined(__clang__)
     #pragma GCC diagnostic pop
 #endif
     (*line)[len]='\0';

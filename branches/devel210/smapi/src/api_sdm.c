@@ -1303,7 +1303,7 @@ static void MSGAPI Convert_Xmsg_To_Fmsg(XMSG * msg, struct _omsg *fmsg)
     }
     else
     {
-#ifdef __GNUC__
+#if defined(__GNUC__) && !defined(__clang__)
     #pragma GCC diagnostic push
     #pragma GCC diagnostic ignored "-Wformat-overflow"
 #endif
@@ -1312,7 +1312,7 @@ static void MSGAPI Convert_Xmsg_To_Fmsg(XMSG * msg, struct _omsg *fmsg)
                 months_ab[msg->date_written.date.mo ? msg->date_written.date.mo - 1 : 0],
                 (msg->date_written.date.yr + 80) % 100, msg->date_written.time.hh,
                 msg->date_written.time.mm, msg->date_written.time.ss << 1);
-#ifdef __GNUC__
+#if defined(__GNUC__) && !defined(__clang__)
     #pragma GCC diagnostic pop
 #endif
     }
