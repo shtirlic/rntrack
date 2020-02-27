@@ -1,0 +1,44 @@
+# $Id$
+# Legacy makefile for building on Linux with gcc
+# No support for the Husky build environment
+
+ifeq ($(USE_CLANG), 1)
+    CC = clang
+    CFLAGS = -O3 -Wall -Wextra -funsigned-char -Ih
+else
+    CC = gcc
+    CFLAGS = -Wall -fPIC -funsigned-char -Ih
+endif
+
+CDEFS=	-DUNIX
+COPT=	-O3
+OBJ=	.o
+
+# on i386, you may add this
+# -fomit-frame-pointer -fstrength-reduce -fPIC -m486
+
+LIB=	ar
+RANLIB= ranlib
+
+TARGET=	libsmapilnx.a
+
+all: $(TARGET)
+
+include makefile.inc
+
+
+# Thunderbirds are go!
+
+#.c.o:
+%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) $(CDEFS) $(COPT) -c $<
+
+$(TARGET): $(OBJS)
+	$(LIB) r $@ $?
+	$(RANLIB) $(TARGET)
+
+clean:
+	-rm *.o
+
+distclean: clean
+	-rm $(TARGET)
