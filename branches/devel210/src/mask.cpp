@@ -38,6 +38,7 @@
 #include "aka.hpp"
 #include "wildmat.hpp"
 #include "script.hpp"
+#include "unused.h"
 
 /*--------------------------------------------------------------------*/
 /*                         Common functions                           */
@@ -1143,7 +1144,7 @@ void ScriptMask::Print(void) const
 
 int ScriptMask::operator ==(cMSG & m) const
 {
-    m   = m;
+    unused(m);
     CHP = 23410;
 
     if(LogLevel >= 5)
