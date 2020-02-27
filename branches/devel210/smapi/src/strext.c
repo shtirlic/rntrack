@@ -348,7 +348,7 @@ char *strseparate(char **stringp, const char *delim)
 
 char *extract_CVS_keyword(char *str)
 {
-    int l;
+    size_t l;
     char *tmp, *r;
 
     if(!str)
@@ -359,7 +359,7 @@ char *extract_CVS_keyword(char *str)
     if ((!tmp)||(!*(++tmp)))
         return NULL;
 
-    l = (int)strlen(tmp);
+    l = strlen(tmp);
 
     if (l<3)
         return NULL;
