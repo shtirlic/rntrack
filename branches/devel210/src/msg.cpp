@@ -40,30 +40,8 @@
 #include "prog.h"
 #include "unused.h"
 
-#ifdef __WATCOMC__
-    #include "months.c"
-#endif
-
 #if defined (__sun__) || defined (__OSX__)
     #define strftim strftime
-#endif
-
-#ifdef _MSC_VER
-char months_ab[][4] =
-{
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
-};
 #endif
 
 char * FromTime(time_t tmt)
@@ -84,7 +62,6 @@ time_t ToTime(char * txt)
     struct tm t;
     char mon[4];
     int i;
-// struct tm *t2;
     time_t tt;
 
     sscanf(txt, "%02u %3s %02u  %02u:%02u:%02u",
@@ -93,7 +70,7 @@ time_t ToTime(char * txt)
           );
 
     t.tm_isdst = -1;
-    t.tm_mon   = 0;
+    t.tm_mon   = -1; /* Current time is returned if month is not found */
 
     if(t.tm_year < 70)
     {
