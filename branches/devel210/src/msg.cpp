@@ -536,8 +536,8 @@ void cMSG::Clear(void)
     _TimesRead = 0;
     _ReplyTo   = 0;
     _NextReply = 0;
-    fChanged   = fPrivate    = fCrash   = fReceived    = fSend     =
-            fFileAttach = fTransit = fOrphan      = fKillSend =
+    fChanged   = fPrivate    = fCrash   = fReceived    = fSent     =
+            fFileAttach = fTransit = fOrphan      = fKillSent =
                                          fLocal      = fHold    = fFileRequest = fRRQ      =
                                                  fIRR        = fARQ     = fFURQ        = fDIR      =
                                                          fIMM        = fCFM     = fTFS         = fKFS      =
@@ -1008,11 +1008,11 @@ void cMSG::AddKludge(const char * & Txt)
             }
             else if(stricmp(p, "K/S") == 0)
             {
-                fKillSend = 1;
+                fKillSent = 1;
             }
             else if(stricmp(p, "SNT") == 0)
             {
-                fSend = 1;
+                fSent = 1;
             }
             else if(stricmp(p, "RCV") == 0)
             {
@@ -1252,7 +1252,7 @@ char * cMSG::FlagsToStr(char * Str)
         strcat(Str, "Rcv ");
     }
 
-    if(fSend)
+    if(fSent)
     {
         strcat(Str, "Snt ");
     }
@@ -1272,7 +1272,7 @@ char * cMSG::FlagsToStr(char * Str)
         strcat(Str, "Orp ");
     }
 
-    if(fKillSend)
+    if(fKillSent)
     {
         strcat(Str, "K/S ");
     }
@@ -1658,11 +1658,11 @@ cMSG & cMSG::operator =(const cMSG & m)
     fPrivate     = m.fPrivate;
     fCrash       = m.fCrash;
     fReceived    = m.fReceived;
-    fSend        = m.fSend;
+    fSent        = m.fSent;
     fFileAttach  = m.fFileAttach;
     fTransit     = m.fTransit;
     fOrphan      = m.fOrphan;
-    fKillSend    = m.fKillSend;
+    fKillSent    = m.fKillSent;
     fLocal       = m.fLocal;
     fHold        = m.fHold;
     fFileRequest = m.fFileRequest;

@@ -69,11 +69,11 @@ typedef struct
 #define H_Private     0x0001
 #define H_Crash       0x0002
 #define H_Received    0x0004
-#define H_Send        0x0008
+#define H_Sent        0x0008
 #define H_FileAttach  0x0010
 #define H_Transit     0x0020
 #define H_Orphan      0x0040
-#define H_KillSend    0x0080
+#define H_KillSent    0x0080
 #define H_Local       0x0100
 #define H_Hold        0x0200
 #define H_NU1         0x0400
@@ -105,9 +105,9 @@ void SetMsgAttr(cMSG & m, unsigned short int & Attr)
         Attr = Attr | H_Received;
     }
 
-    if(m.fSend == 1)
+    if(m.fSent == 1)
     {
-        Attr = Attr | H_Send;
+        Attr = Attr | H_Sent;
     }
 
     if(m.fFileAttach == 1)
@@ -125,9 +125,9 @@ void SetMsgAttr(cMSG & m, unsigned short int & Attr)
         Attr = Attr | H_Orphan;
     }
 
-    if(m.fKillSend == 1)
+    if(m.fKillSent == 1)
     {
-        Attr = Attr | H_KillSend;
+        Attr = Attr | H_KillSent;
     }
 
     if(m.fLocal == 1)
@@ -183,9 +183,9 @@ void SetMsgAttr(unsigned short int & Attr, cMSG & m)
         m.fReceived = 1;
     }
 
-    if(Attr & H_Send)
+    if(Attr & H_Sent)
     {
-        m.fSend = 1;
+        m.fSent = 1;
     }
 
     if(Attr & H_FileAttach)
@@ -203,9 +203,9 @@ void SetMsgAttr(unsigned short int & Attr, cMSG & m)
         m.fOrphan = 1;
     }
 
-    if(Attr & H_KillSend)
+    if(Attr & H_KillSent)
     {
-        m.fKillSend = 1;
+        m.fKillSent = 1;
     }
 
     if(Attr & H_Local)

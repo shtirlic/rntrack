@@ -490,8 +490,8 @@ NormalMask::NormalMask()
     _ToName   = NULL;
     _Subject  = NULL;
     Loops     = (unsigned int)-1;
-    fPrivate  = fCrash      = fReceived    = fSend       = fFileAttach =
-                fTransit    = fOrphan      = fKillSend   = fLocal      =
+    fPrivate  = fCrash      = fReceived    = fSent       = fFileAttach =
+                fTransit    = fOrphan      = fKillSent   = fLocal      =
                 fHold       = fFileRequest = fRRQ        = fIRR        =
                 fARQ        = fFURQ        = fDIR        = fIMM        =
                 fCFM        = fTFS         = fKFS        = fEmpty      =
@@ -593,12 +593,12 @@ void NormalMask::Print(void) const
         strcat(fa1, "-r");
     }
 
-    if(fSend == 1)
+    if(fSent == 1)
     {
         strcat(fa1, "+s");
     }
 
-    if(fSend == 2)
+    if(fSent == 2)
     {
         strcat(fa1, "-s");
     }
@@ -633,12 +633,12 @@ void NormalMask::Print(void) const
         strcat(fa1, "-o");
     }
 
-    if(fKillSend == 1)
+    if(fKillSent == 1)
     {
         strcat(fa1, "+k");
     }
 
-    if(fKillSend == 2)
+    if(fKillSent == 2)
     {
         strcat(fa1, "-k");
     }
@@ -914,7 +914,7 @@ int NormalMask::operator ==(cMSG & m) const
         return FALSE;
     }
 
-    if((fSend - m.fSend) == 1)
+    if((fSent - m.fSent) == 1)
     {
         return FALSE;
     }
@@ -934,7 +934,7 @@ int NormalMask::operator ==(cMSG & m) const
         return FALSE;
     }
 
-    if((fKillSend - m.fKillSend) == 1)
+    if((fKillSent - m.fKillSent) == 1)
     {
         return FALSE;
     }
