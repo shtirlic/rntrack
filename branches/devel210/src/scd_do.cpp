@@ -227,12 +227,12 @@ void PrepareMsg(cMSG & s, cMSG & d, NormalMask * _Mask)
         d.fPrivate  = (_Mask->fPrivate != 0) ? _Mask->fPrivate : s.fPrivate;
         d.fCrash    = (_Mask->fCrash != 0) ? _Mask->fCrash : s.fCrash;
         d.fReceived = (_Mask->fReceived != 0) ? _Mask->fReceived : s.fReceived;
-        d.fSend = (_Mask->fSend != 0) ? _Mask->fSend : s.fSend;
+        d.fSent = (_Mask->fSent != 0) ? _Mask->fSent : s.fSent;
         d.fFileAttach =
             (_Mask->fFileAttach != 0) ? _Mask->fFileAttach : s.fFileAttach;
         d.fTransit  = (_Mask->fTransit != 0) ? _Mask->fTransit : s.fTransit;
         d.fOrphan   = (_Mask->fOrphan != 0) ? _Mask->fOrphan : s.fOrphan;
-        d.fKillSend = (_Mask->fKillSend != 0) ? _Mask->fKillSend : s.fKillSend;
+        d.fKillSent = (_Mask->fKillSent != 0) ? _Mask->fKillSent : s.fKillSent;
         d.fLocal    = (_Mask->fLocal != 0) ? _Mask->fLocal : s.fLocal;
         d.fHold = (_Mask->fHold != 0) ? _Mask->fHold : s.fHold;
         d.fFileRequest =
@@ -255,11 +255,11 @@ void PrepareMsg(cMSG & s, cMSG & d, NormalMask * _Mask)
         d.fPrivate  = (_Mask->fPrivate != 0) ? _Mask->fPrivate : 0;
         d.fCrash    = (_Mask->fCrash != 0) ? _Mask->fCrash : 0;
         d.fReceived = (_Mask->fReceived != 0) ? _Mask->fReceived : 0;
-        d.fSend = (_Mask->fSend != 0) ? _Mask->fSend : 0;
+        d.fSent = (_Mask->fSent != 0) ? _Mask->fSent : 0;
         d.fFileAttach = (_Mask->fFileAttach != 0) ? _Mask->fFileAttach : 0;
         d.fTransit    = (_Mask->fTransit != 0) ? _Mask->fTransit : 0;
         d.fOrphan   = (_Mask->fOrphan != 0) ? _Mask->fOrphan : 0;
-        d.fKillSend = (_Mask->fKillSend != 0) ? _Mask->fKillSend : 0;
+        d.fKillSent = (_Mask->fKillSent != 0) ? _Mask->fKillSent : 0;
         d.fLocal    = (_Mask->fLocal != 0) ? _Mask->fLocal : 0;
         d.fHold = (_Mask->fHold != 0) ? _Mask->fHold : 0;
         d.fFileRequest = (_Mask->fFileRequest != 0) ? _Mask->fFileRequest : 0;
@@ -945,7 +945,7 @@ bool Action::Do(MSGBASE & b, cMSG & m)
         tmt = b.MessageName();
 
         if(KillMode == KILL_ALWAYS ||
-                (KillMode == KILL_FLAG && m.fKillSend))
+                (KillMode == KILL_FLAG && m.fKillSent))
         {
             if(!b.DeleteMsg())
             {
