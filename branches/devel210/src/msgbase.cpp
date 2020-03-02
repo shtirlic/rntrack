@@ -76,7 +76,7 @@ typedef struct
 #define H_KillSent    0x0080
 #define H_Local       0x0100
 #define H_Hold        0x0200
-#define H_NU1         0x0400
+#define H_NotUsed     0x0400
 #define H_FileRequest 0x0800
 #define H_RRQ         0x1000
 #define H_IRR         0x2000
@@ -138,6 +138,11 @@ void SetMsgAttr(cMSG & m, unsigned short int & Attr)
     if(m.fHold == 1)
     {
         Attr = Attr | H_Hold;
+    }
+
+    if(m.fNotUsed == 1)
+    {
+        Attr = Attr | H_NotUsed;
     }
 
     if(m.fFileRequest == 1)
@@ -216,6 +221,11 @@ void SetMsgAttr(unsigned short int & Attr, cMSG & m)
     if(Attr & H_Hold)
     {
         m.fHold = 1;
+    }
+
+    if(Attr & H_NotUsed)
+    {
+        m.fNotUsed = 1;
     }
 
     if(Attr & H_FileRequest)

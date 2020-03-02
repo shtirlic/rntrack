@@ -108,6 +108,7 @@ public:
     uint fKillSent    : 1;   // Kill/Sent
     uint fLocal       : 1;   // Local
     uint fHold        : 1;   // Hold
+    uint fNotUsed     : 1;   // Not used
     uint fFileRequest : 1;   // File Request
     uint fRRQ         : 1;   // RRQ
     uint fIRR         : 1;   // IRR
