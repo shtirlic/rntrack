@@ -868,17 +868,29 @@ bool Action::Do(MSGBASE & b, cMSG & m)
             }
         }
 
-        Log.Level(LOGI) << "Route message from " << m._FromAddr;
-        Log.Level(LOGI) << " to " << m._ToAddr;
-        Log.Level(LOGI) << " via " << f.ToStr() << EOL;
+        if(m.fSent == 0 || Before != NULL)
+        {
+            Log.Level(LOGI) << "Route message from " << m._FromAddr;
+            Log.Level(LOGI) << " to " << m._ToAddr;
+            Log.Level(LOGI) << " via " << f.ToStr() << EOL;
 
-        RSTRLCPY(m._RoutedVia, f.ToStr(), 127);
+            RSTRLCPY(m._RoutedVia, f.ToStr(), 127);
+        }
 
         if(Before != NULL)
         {
             Log.Level(LOGI) << " Execute 'BeforeRoute' ScanDir." << EOL;
             Before->DoWithRoute(*sd->_Base, m);
             m._RoutedVia[0] = '\0';
+        }
+
+        if(m.fSent == 1)
+        {
+            Log.Level(LOGI) << "The message from " << m._FromAddr;
+            Log.Level(LOGI) << " to " << m._ToAddr;
+            Log.Level(LOGI) << " has Sent flag set and will not be routed" << EOL;
+            p.Clean();
+            return TRUE;
         }
 
         p.Set(f);
