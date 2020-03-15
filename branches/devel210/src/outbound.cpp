@@ -968,9 +968,8 @@ PKTrc PKT::AddMsg(cMSG & m, PKTMode mod, int Dest)
     pm.Cost     = m._Cost;
     RSTRLCPY(pm.DateTime, FromTime(m._Time), 20);
     SetMsgAttr(m, pm.Attr);
-    /* In accordance to fts-0001 reset all attributes except Private, Crash,
-       FileAttach, unused, RRQ, IRR, ARQ */
-    pm.Attr = pm.Attr & 0x7413;
+    /* Reset attributes Received, Sent, KillSent, Local, Hold  */
+    pm.Attr = pm.Attr & 0xFC73;
 #ifdef _AIX_CONV
     pm.ToNode   = RotateShort(pm.ToNode);
     pm.FromNode = RotateShort(pm.FromNode);
