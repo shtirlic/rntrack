@@ -868,7 +868,7 @@ bool Action::Do(MSGBASE & b, cMSG & m)
             }
         }
 
-        if(m.fSent == 0 || Before != NULL)
+        if((m.fLok == 0 && m.fSent == 0 && m.fAS == 0) || Before != NULL)
         {
             Log.Level(LOGI) << "Route message from " << m._FromAddr;
             Log.Level(LOGI) << " to " << m._ToAddr;
@@ -884,11 +884,23 @@ bool Action::Do(MSGBASE & b, cMSG & m)
             m._RoutedVia[0] = '\0';
         }
 
-        if(m.fSent == 1)
+        if(m.fLok == 1 || m.fSent == 1 || m.fAS == 1)
         {
             Log.Level(LOGI) << "The message from " << m._FromAddr;
-            Log.Level(LOGI) << " to " << m._ToAddr;
-            Log.Level(LOGI) << " has Sent flag set and will not be routed" << EOL;
+            Log.Level(LOGI) << " to " << m._ToAddr << " has ";
+            if(m.fLok == 1)
+            {
+                Log.Level(LOGI) << "Locked ";
+            }
+            else if(m.fSent == 1)
+            {
+                Log.Level(LOGI) << "Sent ";
+            }
+            else if(m.fAS == 1)
+            {
+                Log.Level(LOGI) << "Archive/Sent ";
+            }
+            Log.Level(LOGI) << "flag set and will not be routed" << EOL;
             p.Clean();
             return TRUE;
         }
