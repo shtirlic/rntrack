@@ -511,7 +511,7 @@ bool MSGASMSG::Set(char * Dir, int BaseType)
     if(!CreateMissingBase && !DirExists(Dir))
     {
         Log.Level(LOGD) << "MSGASMSG.Set: Message base directory '" << Dir <<
-                        "' is not exist." << EOL;
+                        "' does not exist." << EOL;
         return FALSE;
     }
 
