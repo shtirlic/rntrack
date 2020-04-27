@@ -1,0 +1,47 @@
+# $Id$
+# Legacy makefile for building on Linux with gcc
+# No support for the Husky build environment
+
+ifeq ($(USE_MUSL), 1)
+    CC := $(ARCH)-linux-musl-gcc
+    CFLAGS := -Wall -fPIC -funsigned-char -Ih
+else ifeq ($(USE_CLANG), 1)
+    CC := clang
+    CFLAGS := -O3 -Wall -Wextra -funsigned-char -Ih
+else
+    CC := gcc
+    CFLAGS := -Wall -fPIC -funsigned-char -Ih
+endif
+
+ifeq ($(ARCH), i486)
+    CFLAGS += -march=i486
+else ifeq ($(ARCH), i686)
+    CFLAGS += -march=i686
+endif
+
+CDEFS := -DUNIX
+COPT := -O3
+OBJ := .o
+
+LIB := ar
+RANLIB := ranlib
+
+TARGET := libsmapilnx.a
+
+all: $(TARGET)
+
+include makefile.inc
+
+#.c.o:
+%.o: $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) $(CDEFS) $(COPT) -c $<
+
+$(TARGET): $(OBJS)
+	$(LIB) r $@ $?
+	$(RANLIB) $(TARGET)
+
+clean:
+	-rm *.o
+
+distclean: clean
+	-rm $(TARGET)
